@@ -477,8 +477,8 @@ pub(crate) fn codex_provider() -> CodexProvider {
     CodexProvider::new(CodexProvider::default_home())
 }
 
-/// Starts the limits thread; results queue in the returned inbox and `WM_APP_LIMITS`
-/// (carrying no data) tells the window to drain it.
+/// Starts the limits threads (one per provider); results queue in the returned inbox and
+/// `WM_APP_LIMITS` (carrying no data) tells the window to drain it.
 pub fn spawn_worker(hwnd: HWND, control: Arc<Control>) -> Receiver<LimitResult> {
     let claude = claude_provider();
     let codex = codex_provider();

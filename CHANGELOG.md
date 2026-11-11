@@ -15,6 +15,11 @@ All notable changes to this project are documented here. The format follows
 - **Fewer `codex` processes during long outages.** After the `codex app-server` fallback fails,
   CCT skips it for 5 minutes, doubling up to 30, and goes straight to the session logs. Any
   live reading resets the wait (#63).
+- **A slow provider no longer holds up the other.** Claude and Codex are now fetched on their
+  own background threads. While Codex waits for its offline fallback to time out, *Refresh
+  now*, an account switch or the refresh after a reset still updates Claude right away (and
+  the other way round). Each provider is fetched exactly as often as before, and a disabled
+  provider is still never fetched (#89).
 
 ## [0.4.2] - 2026-11-10
 
